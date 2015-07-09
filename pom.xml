@@ -3,15 +3,23 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gxws</groupId>
 	<artifactId>tool-validator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
 		<version.springframework>4.1.7.RELEASE</version.springframework>
 		<version.aspectjweaver>1.8.2</version.aspectjweaver>
 		<version.hibernate.validator>5.1.3.Final</version.hibernate.validator>
+		<version.tool.common>1.2.0-SNAPSHOT</version.tool.common>
+		<version.slf4j>1.7.12</version.slf4j>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.gxws</groupId>
+			<artifactId>tool-common</artifactId>
+			<version>${version.tool.common}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -29,6 +37,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${version.hibernate.validator}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.slf4j}</version>
 		</dependency>
 	</dependencies>
 
