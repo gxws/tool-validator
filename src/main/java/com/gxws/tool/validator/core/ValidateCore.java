@@ -27,8 +27,8 @@ public class ValidateCore {
 	 * 验证bo调用输入参数
 	 * 
 	 * @author zhuwl120820@gxwsxx.com
-	 * @param o
-	 *            参数对象
+	 * @param os
+	 *            参数对象数组
 	 * @param methodName
 	 *            bo对象方法名
 	 * @param targetClass
@@ -37,16 +37,13 @@ public class ValidateCore {
 	 *             bo参数验证异常
 	 * @since 1.0
 	 */
-	public <T> void validate(Object[] os, String methodName,
-			Class<?> targetClass) throws BoParamValidateException {
+	public <T> void validate(Object[] os, String methodName, Class<?> targetClass) throws BoParamValidateException {
 		log.debug("验证输入参数");
 		StringBuffer sb = new StringBuffer();
 		for (Object o : os) {
 			Class<T> oClass = (Class<T>) o.getClass();
-			Validator validator = Validation.buildDefaultValidatorFactory()
-					.getValidator();
-			Set<ConstraintViolation<T>> cv = validator.validate(oClass.cast(o),
-					group(methodName, targetClass));
+			Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+			Set<ConstraintViolation<T>> cv = validator.validate(oClass.cast(o), group(methodName, targetClass));
 			if (0 != cv.size()) {
 				sb.append("[" + oClass.getName());
 				Iterator<ConstraintViolation<T>> it = cv.iterator();
@@ -77,8 +74,7 @@ public class ValidateCore {
 	 * @since 1.0
 	 */
 	private Class<?> group(String methodName, Class<?> targetClass) {
-		String groupClassName = methodName.substring(0, 1).toUpperCase()
-				+ methodName.substring(1);
+		String groupClassName = methodName.substring(0, 1).toUpperCase() + methodName.substring(1);
 		for (Class<?> clz : targetClass.getInterfaces()) {
 			for (Class<?> subclz : clz.getDeclaredClasses()) {
 				if (subclz.getName().endsWith(groupClassName)) {
